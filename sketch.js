@@ -1,22 +1,15 @@
 let boxWidth, boxHeight;
 
-let xsize = 10
-let ysize = 10
-let margin = 300;
 
-let minMarks = 2;
-let maxMarks = 10;
-let spaces = 0.3;
 
-let rows = 40;
-let cols = 40;
+
 
 
 
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  frameRate(3);
+  frameRate(30);
   background((round(random()) * 255));
   // background('black');
   // noLoop();
@@ -34,28 +27,25 @@ function draw() {
     for (let x = 0; x <= width; x += boxWidth) {
 
       // Draw stippled blocks
-
-      // if (random() > 0.5) {
-      //   stipple(
-      //     x,
-      //     x + 2 * random(boxWidth / 3),
-      //     y,
-      //     y + 2 * random(boxHeight / 3),
-      //     random(10000)
-      //   );
-      // }
+      if (random() > 0.5) {
+        stipple(
+          x,
+          x + 2 * random(boxWidth / 3),
+          y,
+          y + 2 * random(boxHeight / 3),
+          random(10000)
+        );
+      }
 
       //  Draw coloured blocks
-      //
-      // if (random() < 0.01) { // Originally 0.01
-      //   noStroke();
-      //   fill(round(random()) * 255); // Black or white?
-      //   rect(x, y, x + random(boxWidth / 3),
-      //     y + random(boxHeight / 3));
-      // }
+      if (random() < 0.01) { // Originally 0.01
+        noStroke();
+        fill(round(random()) * 255); // Black or white?
+        rect(x, y, x + random(boxWidth / 3),
+          y + random(boxHeight / 3));
+      }
 
       // Draw circles
-
       if (random() < 0.01) { // Originally 0.01
         // Decide to fill or not (50%)
         if (random() < 0.5) {
@@ -76,17 +66,28 @@ function draw() {
 
       // Draw psuedotext
 
-      if (random() < 0.2) {
+      if (random() < 0.1) {
         strokeCap(PROJECT);
-        strokeWeight(2);
+        strokeWeight(random(5));
         stroke(round(random()) * 255);
-        let xsize = random(40);
-        let ysize = random(40);
-
-        push();
-        translate(x, y);
-        drawCharacter(xsize, ysize);
-        pop();
+        let xsize = pow(random(10), 3);
+        let ysize = pow(random(10), 3);
+        minMarks = 3;
+        maxMarks = random(20);
+        spaces = 0.4;
+        for (let i = 0; i < random(30); i++) {
+          // x *= i;
+          let n = x + xsize + i * xsize * random(-1, 1);
+          let m = y + ysize + i * ysize;;
+          push();
+          translate(n, m);
+          drawCharacter(xsize, ysize, minMarks, maxMarks, spaces);
+          if (random() < 0.5) {
+            noFill();
+            circle(n, m, xsize);
+          }
+          pop();
+        }
       }
     }
 
