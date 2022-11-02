@@ -20,7 +20,6 @@ function draw() {
 
   for (let y = 0; y <= height; y += boxHeight) {
     for (let x = 0; x <= width; x += boxWidth) {
-
       if (random() < 0.01) {
         rotate(random(PI))
       };
@@ -66,8 +65,6 @@ function draw() {
         push();
         translate(random(width), random(height));
         rotate(random(PI));
-        // rectMode(CENTER);
-        // blendMode(ADD);
         rect(0, 0, width, height);
         pop();
       }
@@ -89,7 +86,6 @@ function draw() {
         maxMarks = random(20);
         spaces = 0.4;
         for (let i = 0; i < random(50); i++) {
-          // x *= i;
           let n = x + xsize + i * xsize * random(-1, 1);
           let m = y + ysize + i * ysize;;
           push();
@@ -104,11 +100,6 @@ function draw() {
       }
     }
   }
-
-
-
-
-
 }
 
 function stipple(xmin, xmax, ymin, ymax, dots) {
@@ -124,11 +115,9 @@ function stipple(xmin, xmax, ymin, ymax, dots) {
   }
 }
 
-
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
   background((round(random()) * 255));
-  // background('black');
 }
 
 function drawCharacter(xsize, ysize) {
