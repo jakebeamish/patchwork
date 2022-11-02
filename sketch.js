@@ -1,30 +1,29 @@
 let boxWidth, boxHeight;
 
-
-
-
-
-
-
-
 function setup() {
   createCanvas(windowWidth, windowHeight);
   frameRate(30);
   background((round(random()) * 255));
-  // background('black');
-  // noLoop();
-  // blendMode(DIFFERENCE)
-
 }
 
 function draw() {
   strokeWeight(random(3));
+
+  if (random() < 0.4) {
+    for (let i = 0; i < random(1000); i++) {
+      point(random(width), random(height))
+    }
+  }
 
   boxWidth = random(width / 10, width / 2);
   boxHeight = random(height / 10, height / 2);
 
   for (let y = 0; y <= height; y += boxHeight) {
     for (let x = 0; x <= width; x += boxWidth) {
+
+      if (random() < 0.01) {
+        rotate(random(PI))
+      };
 
       // Draw stippled blocks
       if (random() > 0.5) {
@@ -57,16 +56,30 @@ function draw() {
         circle(x, y, boxWidth * 2)
       }
 
-      // Draw perpendicular lines
+      if (random() < 0.01) {
+        if (random() < 0.5) {
+          // Decide fill colour (50%)
+          fill(round(random()) * 255);
+        } else {
+          noFill();
+        }
+        push();
+        translate(random(width), random(height));
+        rotate(random(PI));
+        // rectMode(CENTER);
+        // blendMode(ADD);
+        rect(0, 0, width, height);
+        pop();
+      }
 
+      // Draw perpendicular lines
       if (random() < 0.01) {
         line(x, 0, x, height);
         line(0, y, width, y);
       }
 
       // Draw psuedotext
-
-      if (random() < 0.1) {
+      if (random() < 0.2) {
         strokeCap(PROJECT);
         strokeWeight(random(5));
         stroke(round(random()) * 255);
@@ -75,7 +88,7 @@ function draw() {
         minMarks = 3;
         maxMarks = random(20);
         spaces = 0.4;
-        for (let i = 0; i < random(30); i++) {
+        for (let i = 0; i < random(50); i++) {
           // x *= i;
           let n = x + xsize + i * xsize * random(-1, 1);
           let m = y + ysize + i * ysize;;
@@ -90,7 +103,6 @@ function draw() {
         }
       }
     }
-
   }
 
 
